@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/loans")
 public class LoanController {
@@ -15,7 +17,7 @@ public class LoanController {
     public LoanController(LoanService loanService) { this.loanService = loanService; }
 
     @PostMapping
-    public ResponseEntity<LoanResponseDTO> create(@RequestBody LoanRequestDTO dto) {
+    public ResponseEntity<LoanResponseDTO> create(@Valid @RequestBody LoanRequestDTO dto) {
         return ResponseEntity.ok(loanService.createLoan(dto));
     }
 

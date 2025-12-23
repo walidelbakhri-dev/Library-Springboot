@@ -1,4 +1,4 @@
-package com.example.library.service.impl;
+package com.example.library.service;
 
 import com.example.library.dto.BookRequestDTO;
 import com.example.library.dto.BookResponseDTO;

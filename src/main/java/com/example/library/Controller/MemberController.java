@@ -1,5 +1,4 @@
 package com.example.library.Controller;
-
 import com.example.library.dto.MemberRequestDTO;
 import com.example.library.dto.MemberResponseDTO;
 import com.example.library.service.MemberService;
@@ -8,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/members")
 public class MemberController {
@@ -15,7 +16,7 @@ public class MemberController {
     public MemberController(MemberService memberService) { this.memberService = memberService; }
 
     @PostMapping
-    public ResponseEntity<MemberResponseDTO> create(@RequestBody MemberRequestDTO dto) {
+    public ResponseEntity<MemberResponseDTO> create(@Valid @RequestBody MemberRequestDTO dto) {
         return ResponseEntity.ok(memberService.createMember(dto));
     }
 
@@ -31,7 +32,7 @@ public class MemberController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MemberResponseDTO> update(@PathVariable Long id, @RequestBody MemberRequestDTO dto) {
+    public ResponseEntity<MemberResponseDTO> update(@PathVariable Long id, @Valid @RequestBody MemberRequestDTO dto) {
         MemberResponseDTO updated = memberService.updateMember(id, dto);
         return updated == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(updated);
     }

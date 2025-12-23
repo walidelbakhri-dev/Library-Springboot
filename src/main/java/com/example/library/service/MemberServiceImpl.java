@@ -2,6 +2,8 @@ package com.example.library.service;
 
 import com.example.library.dto.MemberRequestDTO;
 import com.example.library.dto.MemberResponseDTO;
+import com.example.library.exception.ConflictException;
+import com.example.library.exception.ResourceNotFoundException;
 import com.example.library.Mapper.MemberMapper;
 import com.example.library.model.Member;
 import com.example.library.Repository.MemberRepository;
@@ -20,6 +22,10 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public MemberResponseDTO createMember(MemberRequestDTO dto) {
+        // conflit sur email
+        memberRepository.findByEmail(dto.getEmail()).ifPresent(m -> {
+            throw new ConflictException("Member with email " + dto.getEmail() + " already exists");
+        });
         Member m = MemberMapper.toEntity(dto);
         Member saved = memberRepository.save(m);
         return MemberMapper.toDto(saved);
@@ -27,7 +33,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public MemberResponseDTO getMemberById(Long id) {
-        return memberRepository.findById(id).map(MemberMapper::toDto).orElse(null);
+        Member member = memberRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Member not found with id " + id));
+        return MemberMapper.toDto(member);
     }
 
     @Override
@@ -38,13 +46,27 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public MemberResponseDTO updateMember(Long id, MemberRequestDTO dto) {
-        return memberRepository.findById(id).map(member -> {
-            member.setName(dto.getName());
-            member.setEmail(dto.getEmail());
-            return MemberMapper.toDto(memberRepository.save(member));
-        }).orElse(null);
+        Member member = memberRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Cannot update — member not found with id " + id));
+
+
+        if (dto.getEmail() != null && !dto.getEmail().equals(member.getEmail())) {
+            memberRepository.findByEmail(dto.getEmail()).ifPresent(existing -> {
+                throw new ConflictException("Another member already uses email " + dto.getEmail());
+            });
+        }
+
+        member.setName(dto.getName());
+        member.setEmail(dto.getEmail());
+        Member saved = memberRepository.save(member);
+        return MemberMapper.toDto(saved);
     }
 
     @Override
-    public void deleteMember(Long id) { memberRepository.deleteById(id); }
+    public void deleteMember(Long id) {
+        if (!memberRepository.existsById(id)) {
+            throw new ResourceNotFoundException("Cannot delete — member not found with id " + id);
+        }
+        memberRepository.deleteById(id);
+    }
 }
