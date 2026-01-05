@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Membres — Library</title>
+    <link rel="stylesheet" href="/css/app.css" />
+    <script src="/js/app.js" defer></script>
+</head>
+<body>
+<div class="container">
+    <h1>Membres</h1>
+    <div id="message"></div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin:12px 0;">
+        <a class="btn btn-primary" href="/members/form.html">+ Nouveau membre</a>
+        <a class="btn btn-secondary" href="/">Accueil</a>
+    </div>
+
+    <div class="card">
+        <table class="table" id="membersTable">
+            <thead><tr><th>Nom</th><th>Email</th><th>Téléphone</th><th>Actions</th></tr></thead>
+            <tbody id="tbodyMembers"></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const tbody = document.getElementById('tbodyMembers');
+      const message = document.getElementById('message');
+
+      try {
+        const members = await apiHelpers.getMembers();
+        tbody.innerHTML = '';
+
+        if (!members.length) {
+          tbody.innerHTML = '<tr><td colspan="4">Aucun membre.</td></tr>';
+          return;
+        }
+
+        members.forEach(m => {
+          const try = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${apiHelpers.escapeHtml((m.prenom || '') + ' ' + (m.nom || ''))}</td>
+            <td>${apiHelpers.escapeHtml(m.email || '—')}</td>
+            <td>${apiHelpers.escapeHtml(m.telephone || '—')}</td>
+            <td>
+              <a class="btn btn-secondary" href="/members/view.html?id=${m.id}">Voir</a>
+              <a class="btn btn-primary" href="/members/form.html?id=${m.id}">Éditer</a>
+              <button class="btn" style="background:#ffecec"
+                onclick="formsHandlers.deleteMemberHandler(${m.id}, this.closest('tr'))">
+                Supprimer
+              </button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+      } catch (e) {
+        console.error(e);
+        message.innerHTML = '<div class="danger">Erreur chargement des membres</div>';
+      }
+    });
+</script>
+
+</body>
+</html>

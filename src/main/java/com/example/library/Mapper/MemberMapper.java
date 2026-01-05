@@ -8,7 +8,7 @@ public class MemberMapper {
     public static Member toEntity(MemberRequestDTO dto) {
         if (dto == null) return null;
         Member m = new Member();
-        m.setName(dto.getName());
+        m.setName(dto.getPrenom());
         m.setEmail(dto.getEmail());
         return m;
     }

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Livres — Library</title>
+    <link rel="stylesheet" href="/css/app.css" />
+    <script src="/js/app.js" defer></script>
+</head>
+<body>
+<div class="container">
+    <h1>Livres</h1>
+    <p class="small">Liste des livres disponibles</p>
+
+    <div id="message"></div>
+
+    <div class="row" style="justify-content:space-between;align-items:center;margin:12px 0;">
+        <div class="col">
+            <a href="/books/form.html" class="btn btn-primary">+ Ajouter un livre</a>
+        </div>
+        <div class="col" style="text-align:right;">
+            <a href="/" class="btn btn-secondary">Accueil</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <table class="table" id="booksTable">
+            <thead>
+            <tr><th>Titre</th><th>Auteur</th><th>ISBN</th><th>Description</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="tbodyBooks"></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        const books = await apiHelpers.getBooks();
+        const tb = document.getElementById('tbodyBooks');
+        tb.innerHTML = '';
+        if (!books || books.length === 0) {
+          tb.innerHTML = '<tr><td colspan="5">Aucun livre trouvé.</td></tr>';
+          return;
+        }
+        books.forEach(b => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${apiHelpers.escapeHtml(b.title)}</td>
+            <td>${apiHelpers.escapeHtml(b.author)}</td>
+            <td>${apiHelpers.escapeHtml(b.isbn||'—')}</td>
+            <td>${apiHelpers.escapeHtml((b.description||'').slice(0,140))}</td>
+            <td>
+              <a class="btn btn-secondary" href="/books/view.html?id=${b.id}">Voir</a>
+              <a class="btn btn-primary" href="/books/form.html?id=${b.id}">Éditer</a>
+              <button class="btn" data-id="${b.id}" style="background:#ffecec;border-radius:8px;margin-left:6px">Supprimer</button>
+            </td>
+          `;
+          tr.querySelector('button').addEventListener('click', async (ev) => {
+            if (!confirm('Supprimer ce livre ?')) return;
+            try {
+              await apiHelpers.deleteBook(b.id);
+              tr.remove();
+              apiHelpers.showMessage('message','Livre supprimé','success');
+            } catch(err) { apiHelpers.showMessage('message','Erreur : '+err.message,'danger'); }
+          });
+          tb.appendChild(tr);
+        });
+      } catch(err) {
+        apiHelpers.showMessage('message','Erreur chargement : '+err.message,'danger');
+      }
+    });
+</script>
+</body>
+</html>

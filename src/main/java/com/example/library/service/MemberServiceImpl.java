@@ -56,7 +56,7 @@ public class MemberServiceImpl implements MemberService {
             });
         }
 
-        member.setName(dto.getName());
+        member.setName(dto.getPrenom());
         member.setEmail(dto.getEmail());
         Member saved = memberRepository.save(member);
         return MemberMapper.toDto(saved);

@@ -6,20 +6,27 @@ import jakarta.validation.constraints.Size;
 
 public class MemberRequestDTO {
 
+    @NotBlank(message = "Le prénom est obligatoire")
+    private String prenom;
+
     @NotBlank(message = "Le nom est obligatoire")
-    @Size(max = 255, message = "Le nom doit contenir au plus {max} caractères")
-    private String name;
+    private String nom;
 
     @NotBlank(message = "L'email est obligatoire")
     @Email(message = "L'email est invalide")
-    @Size(max = 255, message = "L'email doit contenir au plus {max} caractères")
     private String email;
 
-    public MemberRequestDTO() {}
-    public MemberRequestDTO(String name, String email) { this.name = name; this.email = email; }
+    private String telephone;
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public String getPrenom() { return prenom; }
+    public void setPrenom(String prenom) { this.prenom = prenom; }
+
+    public String getNom() { return nom; }
+    public void setNom(String nom) { this.nom = nom; }
+
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
+
+    public String getTelephone() { return telephone; }
+    public void setTelephone(String telephone) { this.telephone = telephone; }
 }

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Voir Membre</title>
+    <link rel="stylesheet" href="/css/app.css" />
+    <script src="/js/app.js" defer></script>
+</head>
+<body>
+<div class="container">
+    <h1 id="memberName">Membre</h1>
+    <div id="message"></div>
+
+    <div class="card" style="margin-top:12px">
+        <p><strong>Email:</strong> <span id="memberEmail"></span></p>
+        <p><strong>Téléphone:</strong> <span id="memberPhone"></span></p>
+        <div style="margin-top:12px">
+            <a id="editBtn" class="btn btn-primary" href="#">Éditer</a>
+            <a class="btn btn-secondary" href="/members/list.html">Retour</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async ()=>{
+      const params = new URLSearchParams(location.search); const id = params.get('id');
+      if (!id) { apiHelpers.showMessage('message','ID manquant','danger'); return; }
+      try {
+        const m = await apiHelpers.getMember(id);
+        document.getElementById('memberName').textContent = (m.firstName||'') + ' ' + (m.lastName||'');
+        document.getElementById('memberEmail').textContent = m.email || '—';
+        document.getElementById('memberPhone').textContent = m.phone || '—';
+        document.getElementById('editBtn').href = '/members/form.html?id=' + m.id;
+      } catch(err) { apiHelpers.showMessage('message','Erreur : '+err.message,'danger'); }
+    });
+</script>
+</body>
+</html>

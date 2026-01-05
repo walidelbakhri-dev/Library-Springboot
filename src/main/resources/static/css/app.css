@@ -1,0 +1,28 @@
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma, Geneva, Verdana,sans-serif}
+body{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;display:flex;justify-content:center;padding:20px;color:#333}
+.container{background:#fff;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,0.18);padding:36px;text-align:center;max-width:980px;width:100%;margin:24px auto;animation:fadeIn .8s ease-out}
+@keyframes fadeIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+h1{font-size:2.4rem;margin-bottom:10px;background:linear-gradient(90deg,#667eea,#764ba2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+p.lead{color:#666;font-size:1.05rem;margin-bottom:18px}
+.status{background:#f0f4ff;border-radius:10px;padding:12px;margin:18px 0;border-left:5px solid #667eea;text-align:left}
+.status h3{color:#667eea;margin-bottom:6px}
+.endpoints{text-align:left;background:#f8f9fa;padding:14px;border-radius:8px;margin-top:16px}
+.endpoints h3{text-align:center;margin-bottom:10px}
+.endpoints ul{list-style:none;padding-left:0}
+.endpoints li{padding:6px 0;border-bottom:1px solid #eee;color:#555}
+.links{display:flex;justify-content:center;gap:12px;margin-top:16px}
+.btn{padding:10px 22px;border-radius:999px;text-decoration:none;font-weight:700;transition:all .22s ease}
+.btn-primary{background:linear-gradient(90deg,#667eea,#764ba2);color:#fff}
+.btn-secondary{background:#f0f4ff;color:#667eea;border:2px solid #667eea}
+.table{width:100%;border-collapse:collapse;margin-top:12px}
+.table th,.table td{padding:10px;border-bottom:1px solid #eee}
+.table th{background:#f7f9ff;text-align:left;color:#333}
+.input,input[type="text"],input[type="email"],input[type="date"],textarea,select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef;outline:none}
+.input:focus,input:focus,textarea:focus,select:focus{box-shadow:0 0 0 6px rgba(102,126,234,0.06);border-color:#667eea}
+.card{background:#fff;border-radius:10px;padding:14px;box-shadow:0 6px 18px rgba(0,0,0,0.06);text-align:left}
+.badge{padding:6px 10px;border-radius:999px;font-weight:700;font-size:.85rem}
+.badge-success{background:#d1fae5;color:#065f46}
+.badge-warning{background:#fff7cc;color:#7a5800}
+.small{font-size:.9rem;color:#777;margin-top:12px}
+@media(max-width:720px){.container{padding:20px}h1{font-size:1.8rem}.links{flex-direction:column;gap:8px}}
