@@ -1,0 +1,30 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/layout :: body">
+<head><title>Emprunts</title></head>
+<body>
+<div>
+    <div class="d-flex justify-content-between mb-3">
+        <h1>Emprunts</h1>
+        <a class="btn btn-primary" th:href="@{/loans/new}">Nouvel emprunt</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead><tr><th>Livre</th><th>Membre</th><th>Emprunt</th><th>Retour</th><th>Statut</th><th></th></tr></thead>
+        <tbody>
+        <tr th:each="loan : ${loans.content}">
+            <td th:text="${loan.bookTitle}"></td>
+            <td th:text="${loan.memberName}"></td>
+            <td th:text="${loan.loanDate}"></td>
+            <td th:text="${loan.returnedDate} ?: '-'"></td>
+            <td th:text="${loan.status}"></td>
+            <td>
+                <form th:if="${loan.returnedDate} == null" th:action="@{|/loans/${loan.id}/return|}" method="post" style="display:inline">
+                    <button class="btn btn-sm btn-success" type="submit">Retour</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

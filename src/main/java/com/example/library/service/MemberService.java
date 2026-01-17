@@ -1,14 +1,17 @@
 package com.example.library.service;
 
-import com.example.library.dto.MemberRequestDTO;
-import com.example.library.dto.MemberResponseDTO;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.example.library.dto.*;
+import org.springframework.data.domain.*;
 
 public interface MemberService {
-    MemberResponseDTO createMember(MemberRequestDTO dto);
-    MemberResponseDTO getMemberById(Long id);
-    Page<MemberResponseDTO> getAllMembers(Pageable pageable);
-    MemberResponseDTO updateMember(Long id, MemberRequestDTO dto);
-    void deleteMember(Long id);
+
+    MemberDto create(MemberCreateDto dto);
+
+    MemberDto update(Long id, MemberUpdateDto dto);
+
+    MemberDto getById(Long id);
+
+    Page<MemberDto> list(String q, Pageable pageable);
+
+    void delete(Long id);
 }

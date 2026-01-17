@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org" th:replace="fragments/layout :: body">
+<head><title th:text="${book.id} != null ? 'Modifier livre' : 'Nouveau livre'">Formulaire</title></head>
+<body>
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <h2 th:text="${book.id} != null ? 'Modifier livre' : 'Nouveau livre'">Form</h2>
+        <form th:action="${book.id} != null ? @{|/books/${book.id}|} : @{/books}" th:object="${book}" method="post">
+            <div class="mb-3">
+                <label class="form-label">Titre</label>
+                <input class="form-control" th:field="*{title}" required maxlength="255"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Auteur</label>
+                <input class="form-control" th:field="*{author}" maxlength="255"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Condition</label>
+                <select class="form-select" th:field="*{condition}">
+                    <option th:value="${T(com.walidelbakhri.library.model.BookCondition).NEW}" th:text="'Nouveau'">Nouveau</option>
+                    <option th:value="${T(com.walidelbakhri.library.model.BookCondition).USED}" th:text="'Ancien'">Ancien</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Statut</label>
+                <select class="form-select" th:field="*{status}">
+                    <option th:value="${T(com.walidelbakhri.library.model.BookStatus).AVAILABLE}" th:text="'Disponible'">Disponible</option>
+                    <option th:value="${T(com.walidelbakhri.library.model.BookStatus).LOANED}" th:text="'Emprunté'">Emprunté</option>
+                    <option th:value="${T(com.walidelbakhri.library.model.BookStatus).UNAVAILABLE}" th:text="'Indisponible'">Indisponible</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">ISBN</label>
+                <input class="form-control" th:field="*{isbn}" maxlength="100"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Année</label>
+                <input class="form-control" th:field="*{year}" type="number"/>
+            </div>
+            <button class="btn btn-primary" type="submit">Enregistrer</button>
+            <a class="btn btn-secondary" th:href="@{/books}">Annuler</a>
+        </form>
+    </div>
+</div>
+</body>
+</html>

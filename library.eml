@@ -4,6 +4,7 @@
 	<contentEntry url="file://$MODULE_DIR$">
 		<testFolder url="file://$MODULE_DIR$/src/test/java"/>
 		<testFolder url="file://$MODULE_DIR$/src/test/resources"/>
+		<testFolder url="file://$MODULE_DIR$/target/generated-test-sources/test-annotations"/>
 		<excludeFolder url="file://$MODULE_DIR$/target"/>
 	</contentEntry>
 	<lib name="Maven: org.hibernate.models:hibernate-models:1.0.1" scope="RUNTIME"/>
@@ -13,6 +14,7 @@
 	<lib name="Maven: org.glassfish.jaxb:txw2:4.0.6" scope="RUNTIME"/>
 	<lib name="Maven: com.sun.istack:istack-commons-runtime:4.1.2" scope="RUNTIME"/>
 	<lib name="Maven: jakarta.inject:jakarta.inject-api:2.0.1" scope="RUNTIME"/>
+	<lib name="Maven: com.mysql:mysql-connector-j:9.5.0" scope="RUNTIME"/>
 	<lib name="Maven: org.springframework.boot:spring-boot-devtools:4.0.0" scope="RUNTIME"/>
 	<lib name="Maven: com.h2database:h2:2.4.240" scope="RUNTIME"/>
 	<lib name="Maven: org.springframework.boot:spring-boot-starter-data-jpa-test:4.0.0" scope="TEST"/>
@@ -56,6 +58,10 @@
 	<lib name="Maven: org.springframework.boot:spring-boot-resttestclient:4.0.0" scope="TEST"/>
 	<lib name="Maven: org.springframework.boot:spring-boot-restclient:4.0.0" scope="TEST"/>
 	<lib name="Maven: org.springframework.boot:spring-boot-http-client:4.0.0" scope="TEST"/>
+	<lib name="Maven: io.jsonwebtoken:jjwt-impl:0.11.5" scope="RUNTIME"/>
+	<lib name="Maven: io.jsonwebtoken:jjwt-jackson:0.11.5" scope="RUNTIME"/>
+	<lib name="Maven: com.fasterxml.jackson.core:jackson-databind:2.20.1" scope="RUNTIME"/>
+	<lib name="Maven: com.fasterxml.jackson.core:jackson-core:2.20.1" scope="RUNTIME"/>
 	<levels>
 		<level name="Maven: org.springframework.boot:spring-boot-starter-data-jpa:4.0.0" value="project"/>
 		<level name="Maven: org.springframework.boot:spring-boot-starter:4.0.0" value="project"/>
@@ -88,9 +94,7 @@
 		<level name="Maven: jakarta.inject:jakarta.inject-api:2.0.1" value="project"/>
 		<level name="Maven: org.springframework:spring-orm:7.0.1" value="project"/>
 		<level name="Maven: org.springframework.data:spring-data-jpa:4.0.0" value="project"/>
-		<level name="Maven: org.springframework:spring-aop:7.0.1" value="project"/>
 		<level name="Maven: org.springframework:spring-tx:7.0.1" value="project"/>
-		<level name="Maven: org.springframework:spring-beans:7.0.1" value="project"/>
 		<level name="Maven: org.antlr:antlr4-runtime:4.13.2" value="project"/>
 		<level name="Maven: org.springframework:spring-aspects:7.0.1" value="project"/>
 		<level name="Maven: org.aspectj:aspectjweaver:1.9.25" value="project"/>
@@ -98,18 +102,10 @@
 		<level name="Maven: org.springframework.boot:spring-boot-sql:4.0.0" value="project"/>
 		<level name="Maven: org.springframework.boot:spring-boot-transaction:4.0.0" value="project"/>
 		<level name="Maven: org.springframework:spring-jdbc:7.0.1" value="project"/>
-		<level name="Maven: org.springframework.boot:spring-boot-starter-validation:4.0.0" value="project"/>
-		<level name="Maven: org.springframework.boot:spring-boot-validation:4.0.0" value="project"/>
-		<level name="Maven: org.apache.tomcat.embed:tomcat-embed-el:11.0.14" value="project"/>
-		<level name="Maven: org.hibernate.validator:hibernate-validator:9.0.1.Final" value="project"/>
-		<level name="Maven: jakarta.validation:jakarta.validation-api:3.1.1" value="project"/>
-		<level name="Maven: org.jboss.logging:jboss-logging:3.6.1.Final" value="project"/>
-		<level name="Maven: com.fasterxml:classmate:1.7.1" value="project"/>
 		<level name="Maven: org.springframework.boot:spring-boot-starter-webmvc:4.0.0" value="project"/>
 		<level name="Maven: org.springframework.boot:spring-boot-starter-jackson:4.0.0" value="project"/>
 		<level name="Maven: org.springframework.boot:spring-boot-jackson:4.0.0" value="project"/>
 		<level name="Maven: tools.jackson.core:jackson-databind:3.0.2" value="project"/>
-		<level name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.20" value="project"/>
 		<level name="Maven: tools.jackson.core:jackson-core:3.0.2" value="project"/>
 		<level name="Maven: org.springframework.boot:spring-boot-starter-tomcat:4.0.0" value="project"/>
 		<level name="Maven: org.springframework.boot:spring-boot-starter-tomcat-runtime:4.0.0" value="project"/>
@@ -124,6 +120,7 @@
 		<level name="Maven: org.springframework.boot:spring-boot-servlet:4.0.0" value="project"/>
 		<level name="Maven: org.springframework:spring-webmvc:7.0.1" value="project"/>
 		<level name="Maven: org.springframework:spring-expression:7.0.1" value="project"/>
+		<level name="Maven: com.mysql:mysql-connector-j:9.5.0" value="project"/>
 		<level name="Maven: org.springframework.boot:spring-boot-devtools:4.0.0" value="project"/>
 		<level name="Maven: org.springframework.boot:spring-boot:4.0.0" value="project"/>
 		<level name="Maven: org.springframework:spring-core:7.0.1" value="project"/>
@@ -131,6 +128,15 @@
 		<level name="Maven: org.jspecify:jspecify:1.0.0" value="project"/>
 		<level name="Maven: org.springframework:spring-context:7.0.1" value="project"/>
 		<level name="Maven: org.springframework.boot:spring-boot-autoconfigure:4.0.0" value="project"/>
+		<level name="Maven: org.springframework.boot:spring-boot-starter-security:4.0.0" value="project"/>
+		<level name="Maven: org.springframework.boot:spring-boot-security:4.0.0" value="project"/>
+		<level name="Maven: org.springframework.security:spring-security-config:7.0.0" value="project"/>
+		<level name="Maven: org.springframework.security:spring-security-core:7.0.0" value="project"/>
+		<level name="Maven: org.springframework.security:spring-security-crypto:7.0.0" value="project"/>
+		<level name="Maven: org.springframework.security:spring-security-web:7.0.0" value="project"/>
+		<level name="Maven: org.springframework:spring-aop:7.0.1" value="project"/>
+		<level name="Maven: org.springframework:spring-beans:7.0.1" value="project"/>
+		<level name="Maven: jakarta.validation:jakarta.validation-api:3.1.1" value="project"/>
 		<level name="Maven: com.h2database:h2:2.4.240" value="project"/>
 		<level name="Maven: org.springframework.boot:spring-boot-starter-data-jpa-test:4.0.0" value="project"/>
 		<level name="Maven: org.springframework.boot:spring-boot-starter-test:4.0.0" value="project"/>
@@ -174,5 +180,17 @@
 		<level name="Maven: org.springframework.boot:spring-boot-resttestclient:4.0.0" value="project"/>
 		<level name="Maven: org.springframework.boot:spring-boot-restclient:4.0.0" value="project"/>
 		<level name="Maven: org.springframework.boot:spring-boot-http-client:4.0.0" value="project"/>
+		<level name="Maven: org.springframework.boot:spring-boot-starter-validation:4.0.0" value="project"/>
+		<level name="Maven: org.springframework.boot:spring-boot-validation:4.0.0" value="project"/>
+		<level name="Maven: org.apache.tomcat.embed:tomcat-embed-el:11.0.14" value="project"/>
+		<level name="Maven: org.hibernate.validator:hibernate-validator:9.0.1.Final" value="project"/>
+		<level name="Maven: org.jboss.logging:jboss-logging:3.6.1.Final" value="project"/>
+		<level name="Maven: com.fasterxml:classmate:1.7.1" value="project"/>
+		<level name="Maven: io.jsonwebtoken:jjwt-api:0.11.5" value="project"/>
+		<level name="Maven: io.jsonwebtoken:jjwt-impl:0.11.5" value="project"/>
+		<level name="Maven: io.jsonwebtoken:jjwt-jackson:0.11.5" value="project"/>
+		<level name="Maven: com.fasterxml.jackson.core:jackson-databind:2.20.1" value="project"/>
+		<level name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.20" value="project"/>
+		<level name="Maven: com.fasterxml.jackson.core:jackson-core:2.20.1" value="project"/>
 	</levels>
 </component>

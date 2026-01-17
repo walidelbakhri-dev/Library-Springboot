@@ -1,0 +1,31 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="fragments/layout :: body">
+<head><title>Nouvel emprunt</title></head>
+<body>
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <h2>Nouveau emprunt</h2>
+        <form th:action="@{/loans}" th:object="${loan}" method="post">
+            <div class="mb-3">
+                <label class="form-label">Membre</label>
+                <select class="form-select" th:field="*{memberId}" required>
+                    <option th:each="m : ${members}" th:value="${m.id}" th:text="${m.fullName}"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Livre</label>
+                <select class="form-select" th:field="*{bookId}" required>
+                    <option th:each="b : ${books}" th:value="${b.id}" th:text="${b.title}"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Durée (jours)</label>
+                <input class="form-control" th:field="*{dueInDays}" type="number" min="1" value="14"/>
+            </div>
+            <button class="btn btn-primary" type="submit">Emprunter</button>
+            <a class="btn btn-secondary" th:href="@{/loans}">Annuler</a>
+        </form>
+    </div>
+</div>
+</body>
+</html>
